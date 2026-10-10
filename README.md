@@ -10,7 +10,7 @@ Este proyecto es un sistema de compra y venta de una óptica en el que el usuari
 
 ## 2. Equipo Los Jerrys
 
-- **Hernández González Erick**
+- **Hernandez González Erick**
 - **Hernández Gutierrez Eduardo Nicolas**
 - **Pérez Espinosa Gael Alejandro**
 
