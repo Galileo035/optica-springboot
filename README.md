@@ -1,4 +1,4 @@
-# 👓 Sistema de Compra y Venta para Óptica
+# Sistema de Compra y Venta para Óptica
 
 ---
 
@@ -8,9 +8,9 @@ Este proyecto es un sistema de compra y venta de una óptica en el que el usuari
 
 ---
 
-## 2. EQUIPO Los Jerrys
+## 2. Equipo Los Jerrys
 
-- **Hernandez Gonzalez Erick**
+- **Hernández Gonzalez Erick**
 - **Hernández Gutierrez Eduardo Nicolas**
 - **Pérez Espinosa Gael Alejandro**
 
