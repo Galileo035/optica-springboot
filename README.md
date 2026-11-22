@@ -59,3 +59,88 @@ Este proyecto es un sistema de compra y venta de una óptica en el que el usuari
 - **Funcionalidad:** Asegurar que cuando el usuario elija una opción, los datos sean correctos (por ejemplo, que la cantidad de accesorios no sea negativa, que el ID del armazón exista y que los campos obligatorios no vengan vacíos).
 - **Paquete de Spring Boot:** Spring Boot Starter Validation (`spring-boot-starter-validation`).
 - **Qué aporta:** Permite usar anotaciones sencillas (como `@NotNull`, `@Min`, `@Size`) en las clases para validar automáticamente la información antes de procesar la compra o la cotización.
+
+---
+
+## 5. Relaciones entre los modelos (Parte 4)
+
+### 5.1 Relaciones de uno a muchos
+
+En el sistema se identificaron estas relaciones de uno a muchos:
+
+- Un cliente puede realizar muchas compras.
+- Un armazón puede estar en muchas compras.
+- Una graduación puede estar en muchas compras.
+
+En cada modelo del lado "uno" se agregó una lista de compras (`List<Compra>` llamada `compras`). En la clase `Compra` se guardan el cliente, el armazón y la graduación con la anotación `@ManyToOne`.
+
+### 5.2 Diagrama entidad-relación
+
+```mermaid
+erDiagram
+    CLIENTE ||--o{ COMPRA : realiza
+    ARMAZON ||--o{ COMPRA : aparece_en
+    GRADUACION ||--o{ COMPRA : aparece_en
+    CLIENTE {
+        Long id
+        String nombre
+        String correo
+    }
+    ARMAZON {
+        Long id
+        String nombre
+        String material
+        double precio
+    }
+    GRADUACION {
+        Long id
+        String descripcion
+        double precio
+    }
+    COMPRA {
+        Long id
+        String fecha
+        double total
+    }
+```
+
+### 5.3 Diagrama de clases
+
+```mermaid
+classDiagram
+    class Cliente {
+        Long id
+        String nombre
+        String correo
+        List~Compra~ compras
+    }
+    class Armazon {
+        Long id
+        String nombre
+        String material
+        double precio
+        List~Compra~ compras
+    }
+    class Graduacion {
+        Long id
+        String descripcion
+        double precio
+        List~Compra~ compras
+    }
+    class Compra {
+        Long id
+        String fecha
+        double total
+        Cliente cliente
+        Armazon armazon
+        Graduacion graduacion
+    }
+    Cliente "1" --> "*" Compra
+    Armazon "1" --> "*" Compra
+    Graduacion "1" --> "*" Compra
+```
+
+### 5.4 Rutas nuevas
+
+- `/clientes`: listar, buscar, crear, actualizar y borrar clientes.
+- `/compras`: listar, buscar, crear, actualizar y borrar compras.
