@@ -144,3 +144,27 @@ classDiagram
 
 - `/clientes`: listar, buscar, crear, actualizar y borrar clientes.
 - `/compras`: listar, buscar, crear, actualizar y borrar compras.
+
+## 6. API final (Swagger, JWT y muchos a muchos)
+
+### 6.1 Swagger
+
+Se agregó Swagger con la librería SpringDoc. Al correr el proyecto, la documentación de las rutas se abre en `/swagger-ui.html`, donde también se pueden probar. Con el botón Authorize se pega el token para usar las rutas protegidas.
+
+### 6.2 Autenticación con JWT
+
+Se agregó el inicio de sesión con JWT. Las rutas de acceso son:
+
+- `POST /auth/registro`: crea un usuario nuevo con `usuario` y `contrasena`.
+- `POST /auth/login`: revisa los datos y devuelve el token.
+
+Todas las demás rutas piden el token en el encabezado `Authorization: Bearer token`. Si no se manda, la respuesta es 401. El token dura una hora y las contraseñas se guardan encriptadas.
+
+### 6.3 Relación de muchos a muchos
+
+Una compra puede llevar varios accesorios y un accesorio puede estar en varias compras. Para esto, `Compra` tiene una lista de accesorios con `@ManyToMany` y `Accesorio` tiene la lista de compras. La base de datos crea la tabla `compra_accesorio` para unirlos.
+
+```mermaid
+erDiagram
+    COMPRA }o--o{ ACCESORIO : lleva
+```
