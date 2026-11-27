@@ -3,6 +3,7 @@ package com.optica.optica.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
+import java.util.List;
 
 @Entity
 @Data
@@ -26,4 +27,9 @@ public class Compra {
     @ManyToOne
     @JsonIgnoreProperties("compras")
     private Graduacion graduacion;
+
+    @ManyToMany
+    @JoinTable(name = "compra_accesorio", joinColumns = @JoinColumn(name = "compra_id"), inverseJoinColumns = @JoinColumn(name = "accesorio_id"))
+    @JsonIgnoreProperties("compras")
+    private List<Accesorio> accesorios;
 }
